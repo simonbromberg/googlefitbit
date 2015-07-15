@@ -18,7 +18,7 @@ Parts of this script are based on work from the following sources.  The main dif
 - Original script by loghound@gmail.com
 - Original instructional video by Ernesto Ramirez at http://vimeo.com/26338767
 - Modifications by Mark Leavitt (PDX Quantified Self organizer) www.markleavitt.com
-- https://github.com/qslabs/FitbitDailyData/blob/master/FitbitDailyData.gs_
+- https://github.com/qslabs/FitbitDailyData
 
 ### Setting up:
 1. Create a new Google spreadsheet, click Tools > Script editor... then copy and paste the contents of this file into the script editor.

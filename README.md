@@ -1,6 +1,8 @@
 # googlefitbit
 Google scripts for Fitbit data download
+
 I have no affiliation with Fitbit
+
 Simon Bromberg (http://sbromberg.com)
 
 ## interday.gs
@@ -40,6 +42,3 @@ Note your OAuth 2.0 Client ID and your Client (Consumer) Secret.
 7. Back in your spreadhseet, hit Sync, and after a few moments the data should load in.
 
 If I forgot something, or it doesn't work, please let me know.
-
-
-

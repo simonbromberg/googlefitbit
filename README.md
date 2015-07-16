@@ -5,7 +5,9 @@ I have no affiliation with Fitbit
 
 Simon Bromberg (http://sbromberg.com) 
 
-If you found this useful, shoot me a tweet ([@shimmb](https://twitter.com/shimmb "My Twitter")) or [buy me a coffee](https://cash.me/$himmy).
+If you found this useful, shoot me a tweet ([@shimmb](https://twitter.com/shimmb "My Twitter")) and/or [buy me a coffee](https://cash.me/$himmy).
+
+Planning on adding another version of the file with intraday download soon (Note: you must ask Fitbit for permission for intraday download access).
 
 ## interday.gs
 Download step data, one row per day, from a start day to the present. Make sure not to set the start day too far in the past.

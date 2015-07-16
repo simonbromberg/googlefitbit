@@ -3,7 +3,9 @@ Google scripts for Fitbit data download
 
 I have no affiliation with Fitbit
 
-Simon Bromberg (http://sbromberg.com)
+Simon Bromberg (http://sbromberg.com) 
+
+If you found this useful, shoot me a tweet (@shimmb) or [buy me a coffee](https://cash.me/$himmy).
 
 ## interday.gs
 Download step data, one row per day, from a start day to the present. Make sure not to set the start day too far in the past.

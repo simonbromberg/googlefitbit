@@ -1,4 +1,4 @@
-// VERSION 0.1, July 15 2015
+// VERSION 0.1.1, July 19 2015
 // Simon Bromberg (http://sbromberg.com)
 // You are free to use, modify, copy any of the code in this script for your own purposes, as long as it's not for evil
 // If you do anything cool with it, let me know!
@@ -41,7 +41,6 @@ var LOGGABLES = ["activities/log/steps", "activities/log/distance",
     "activities/log/minutesVeryActive", "sleep/timeInBed",
     "sleep/minutesAsleep", "sleep/minutesAwake", "sleep/awakeningsCount",
     "body/weight", "body/bmi", "body/fat",];
-var FITBITACCOUNTS = ["FB1","FB2","FB3","FB4","FB5","FB6", "FB7","FB8","FB9","FB10"];
 
 function getFitbitService() {
   // Create a new service with the given name. The name will be used when
@@ -135,7 +134,7 @@ function setup() {
     var app = UiApp.createApplication().setTitle("Setup Fitbit Download");
     app.setStyleAttribute("padding", "10px");
 
-    var consumerKeyLabel = app.createLabel("Fitbit OAuth Consumer Key:*");
+    var consumerKeyLabel = app.createLabel("Fitbit OAuth 2.0 Client ID:*");
     var consumerKey = app.createTextBox();
     consumerKey.setName("consumerKey");
     consumerKey.setWidth("100%");
@@ -208,7 +207,6 @@ function sync() {
         setup();
         return;
     }
-  Logger.log("sync");
   var colIndex = 1
   var dateColDone = 0;
   var doc = SpreadsheetApp.getActiveSpreadsheet();
@@ -217,7 +215,6 @@ function sync() {
   doc.getRange("R2C1").setValue("Battery");
   doc.getRange("R3C1").setValue("Last Sync");
   doc.getRange("R4C1").setValue("Date");
-  Logger.log("set up columns");
   var user = getUser();
   var options = { headers:{
         "Authorization": 'Bearer ' + getFitbitService().getAccessToken(),

@@ -5,14 +5,13 @@ I have no affiliation with Fitbit
 
 Simon Bromberg (http://sbromberg.com) 
 
-If you found this useful, shoot me a tweet ([@shimmb](https://twitter.com/shimmb "My Twitter")) and/or [buy me a coffee](https://cash.me/$himmy).
+If you found this useful, shoot me a tweet ([@shimmb](https://twitter.com/shimmb "My Twitter")) and/or [buy me a coffee](https://cash.me/$himmy) (if you're feeling generous).
 
-Planning on adding another version of the file with intraday download soon (Note: you must ask Fitbit for permission for intraday download access).
-
+Some cleanup / minor changes still outstanding, but everything should work fine.
 ## interday.gs
 Download step data, one row per day, from a start day to the present. Make sure not to set the start day too far in the past.
 
-VERSION 0.1, July 15 2015
+VERSION 0.1.1, July 19 2015
 You are free to use, modify, copy any of the code in this script for your own purposes, as long as it's not for evil
 If you do anything cool with it, let me know!
 Note: there are minor improvements/cleanups still to be made in this file, but it should work as is if everything is setup properly
@@ -51,4 +50,3 @@ If I forgot something, or it doesn't work, please let me know.
 Similar setup to interday, except you need to contact Fitbit to ask for access to intraday data. Also menu names are slightly different.
 Based on this post, http://quantifiedself.com/2014/09/download-minute-fitbit-data/
 Some minor cleanup / changes outstanding (e.g. headers) but should still work.
-

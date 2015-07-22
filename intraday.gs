@@ -1,4 +1,4 @@
-// VERSION 0.1 July 19 2015
+// VERSION 0.2 July 22 2015
 // Simon Bromberg (http://sbromberg.com)
 // You are free to use, modify, copy any of the code in this script for your own purposes, as long as it's not for evil
 // If you do anything cool with it, let me know!
@@ -17,9 +17,6 @@ var CONSUMER_SECRET_PROPERTY_NAME = "fitbitConsumerSecret";
 var PROJECT_KEY_PROPERTY_NAME = "projectKey";
 
 var SERVICE_IDENTIFIER = 'fitbit';
-
-var DataTypes = {"interday":0, "intraday":1};
-var dataType = DataTypes.intraday;
 
 function onOpen() {
     var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -297,107 +294,51 @@ function refreshTimeSeries() {
         "Authorization": 'Bearer ' + getFitbitService().getAccessToken(),
         "method": "GET"
         }};
-  	// [wwu]
-  	if (dataType == DataTypes.interday) {
-  		// get inspired here http://wiki.fitbit.com/display/API/API-Get-Time-Series
-   		var activities = ["activities/log/steps", "activities/log/distance", "activities/log/activeScore", "activities/log/calories",
-    	"activities/log/minutesSedentary", "activities/log/minutesLightlyActive", "activities/log/minutesFairlyActive", "activities/log/minutesVeryActive",
-    	"sleep/timeInBed", "sleep/minutesAsleep", "sleep/awakeningsCount",
-    	"foods/log/caloriesIn"];
-           var interdays = ['activities-log-steps', 'activities-log-distance', 'activities-log-activeScore', 
-                            'activities-log-calories', 'activities-log-minutesSedentary', 'activities-log-minutesLightlyActive', 
-                            'activities-log-minutesFairlyActive', 'activities-log-minutesVeryActive', 
-                            'sleep-timeInBed', 'sleep-minutesAsleep', 'sleep-awakeningsCount',
-                           'foods-log-caloriesIn'];
-      
-  	}
-  	// begin[wwu]
-  	else if (dataType == DataTypes.intraday) {
-    	var activities = ["activities/log/steps"];
-    	var intradays = ["activities-log-steps-intraday"];
+      var activities = ["activities/log/steps"];
+      var intradays = ["activities-log-steps-intraday"];
 
-  	}
-	var lastIndex = 0;
+  var lastIndex = 0;
     for (var activity in activities) {
-    	var index = 0;
-	 	var dateString = getFirstDate();
-	 	date = parseDate(dateString);
+      var index = 0;
+    var dateString = getFirstDate();
+    date = parseDate(dateString);
         var table = new Array();
-	    while (1) {
-  			// end[wwu]
-        	//[wwu] var dateString = Utilities.formatDate(new Date(), "GMT", "yyyy-MM-dd");
-        	//[wwu] dateString = "today";
-        	var currentActivity = activities[activity];
-        	try {
-         		// [wwu]
-         	 	if (dataType == DataTypes.interday) {
-            		var result = UrlFetchApp.fetch("https://api.fitbit.com/1/user/-/" + currentActivity + "/date/" + dateString
-                                           + "/" + period + ".json", options); 
-        		}
-          		else if (dataType == DataTypes.intraday) {
-            		var result = UrlFetchApp.fetch("https://api.fitbit.com/1/user/-/" + currentActivity + "/date/" + dateString+ "/" + dateString + ".json", options);
-          		}
-        	} catch(exception) {
-            	Logger.log(exception);
-        	}
-        	var o = Utilities.jsonParse(result.getContentText());
-             // Logger.log(o);
-        	var cell = doc.getRange('a3');
-        	var titleCell = doc.getRange("a2");
-        	titleCell.setValue("Date");
-        	var title = currentActivity.split("/");
-        	title = title[title.length - 1];
-        	titleCell.offset(0, 1 + activity * 1.0).setValue(title);
-        	// [wwu] var index = 0;
-		
-        	//[wwu] for (var i in o) {
-            // [wwu] var row = o[i];
-          	// begin [wwu]
-          //Logger.log(intradays);
-    		if (dataType == DataTypes.intraday) {
-            	var row = o[intradays[activity]]["dataset"];
-        	}
-        	else if (dataType == DataTypes.interday) {
-            	var row = o[interdays[activity]];
-        	}
-          	// end [wwu]
-    	  	for (var j in row) {
-            	var val = row[j];
-               var arr = new Array(2);
-                // [wwu]
-                if (dataType == DataTypes.interday) {
-                    cell.offset(index, 0).setValue(val["dateTime"]);
-              	}
-              else if (dataType == DataTypes.intraday) {
-                    arr[0] = dateString + ' ' + val["time"];
-//                    cell.offset(index, 0).setValue(dateString + ' ' + val["time"]);
-              }
-        		// set the date index
-  //            cell.offset(index, 1 + activity * 1.0).setValue(val["value"]);
-               arr[1] = val["value"];
-              table.push(arr);
+      while (1) {
+          var currentActivity = activities[activity];
+          try {
+                var result = UrlFetchApp.fetch("https://api.fitbit.com/1/user/-/" + currentActivity + "/date/" + dateString+ "/" + dateString + ".json", options);
+          } catch(exception) {
+              Logger.log(exception);
+          }
+          var o = Utilities.jsonParse(result.getContentText());
+
+          var cell = doc.getRange('a3');
+          var titleCell = doc.getRange("a2");
+          titleCell.setValue("Date");
+          var title = currentActivity.split("/");
+          title = title[title.length - 1];
+          titleCell.offset(0, 1 + activity * 1.0).setValue(title);
+            var row = o[intradays[activity]]["dataset"];
+          for (var j in row) {
+              var val = row[j];
+                var arr = new Array(2);
+                arr[0] = dateString + ' ' + val["time"];
+                arr[1] = val["value"];
+                table.push(arr);
               // set the value index index
-              index++;
-            }
-          
-            if (getFirstDate() == getLastDate()) {
-            	break;
-            }
-            else {
-	  			date.setDate(date.getDate()+1);
-  				dateString = Utilities.formatDate(date, "GMT", "yyyy-MM-dd");
-  				if (dateString > getLastDate()) {
-  					break;
-  				}
-  				//Logger.log(dateString);
-			}
+               index++;
+           }
+          date.setDate(date.getDate()+1);
+          dateString = Utilities.formatDate(date, "GMT", "yyyy-MM-dd");
+          if (dateString > getLastDate()) {
+            break;
+          }
 
         }
       
-      // Batch set values of table
+      // Batch set values of table, much faster than doing each time per loop run, this wouldn't work as is if there were multiple activities being listed
           doc.getRange("A3:B"+(table.length+2)).setValues(table);
-        // [wwu]}
-	}
+  }
 }
 // parse a date in yyyy-mm-dd format
 function parseDate(input) {

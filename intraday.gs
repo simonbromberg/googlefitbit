@@ -272,7 +272,7 @@ function getUser() {
         "method": "GET"
           }};
   var response = UrlFetchApp.fetch("https://api.fitbit.com/1/user/-/profile.json",options);
-  var o = Utilities.jsonParse(response.getContentText());
+  var o = JSON.parse(response.getContentText());
   return o.user;
 }
 
@@ -310,7 +310,7 @@ function refreshTimeSeries() {
           } catch(exception) {
               Logger.log(exception);
           }
-          var o = Utilities.jsonParse(result.getContentText());
+          var o = JSON.parse(result.getContentText());
 
           var cell = doc.getRange('a3');
           var titleCell = doc.getRange("a2");

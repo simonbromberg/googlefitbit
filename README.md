@@ -50,3 +50,25 @@ If I forgot something, or it doesn't work, please let me know.
 Similar setup to interday, except you need to contact Fitbit to ask for access to intraday data. Also menu names are slightly different.
 Based on this post, http://quantifiedself.com/2014/09/download-minute-fitbit-data/
 Some minor cleanup / changes outstanding (e.g. headers) but should still work.
+
+Note: if you want to get heart rate data follow these additional steps, courtesy of [gthm on the Fitbit forum](https://community.fitbit.com/t5/Web-API/Google-apps-script-for-minute-by-minute-data-stopped-working/m-p/890582/highlight/true#M2685 "Fitbit Forum")
+
+1) When requisting Oauth2 the default permission scope does not include heart rate. It pretty much includes everything but heart rate and calories. So for better measure I explicitly granted scope.
+ 
+In function getFitbitService() { // updated the below line
+.setScope('activity heartrate location nutrition profile settings sleep social weight')
+ 
+2) Update the activities and intradays variables accordingly
+ 
+var activities = ["activities/heart"];
+var intradays = ["activities-heart-intraday"];
+ 
+3) Request the proper URL for heart rate. The API docs are not clear enought, especially near the URL templates. I got the last template of the API docs working for heart rate.
+ 
+It was easier for me to hardcode the URL so I just replaced the featch call with this
+ 
+var result = UrlFetchApp.fetch("https://api.fitbit.com/1/user/-/activities/heart/date/2015-07-07/1d/1sec/time/00:00/23:59.json", options);
+ 
+Once you get this request to work, you can generalize and construct the above request dynamically based on user inputs.
+ 
+PS: I could not find a way to download intra day heart for multiple days through single call. Looks like the call only supports for a single day (too much data to include multiple days I guess). I am thinking about looping the date range and fetching the details multiple times.

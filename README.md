@@ -24,7 +24,7 @@ Parts of this script are based on work from the following sources.  The main dif
 - https://github.com/qslabs/FitbitDailyData
 
 ### Setting up:
-1. Create a **new** Google spreadsheet (do not try to re-use one with the old version of the script), click Tools > Script editor... then copy and paste the contents of the interday.gs file (see above) into the script editor.
+1. Create a **new** Google spreadsheet (do not try to re-use one with the old version of the script), click Tools > Script editor... then copy and paste the contents of the interday.gs file (see above) into the script editor. Return to the spreadsheet and refresh the page. A couple seconds after the page reloads you should see a "Fitbit" menu at the top.
 
 2. Add the Oauth2 Google Script library to your project by clicking Resources > Libraries... (menus inside the script editor). Then search for the OAuth2.0 library by typing in the project key "MswhXl8fVhTFUH_Q3UOJbXvxhMjh3Sh48" and hitting Select. More info on that library on [its Github page](https://github.com/googlesamples/apps-script-oauth2 "apps-script-oauth2"). Select the latest version and click Save.
 

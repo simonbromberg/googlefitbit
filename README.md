@@ -5,7 +5,7 @@ I have no affiliation with Fitbit
 
 Simon Bromberg (http://sbromberg.com) 
 
-If you found this useful, shoot me a tweet ([@shimmb](https://twitter.com/shimmb "My Twitter")) and/or [buy me a coffee](https://cash.me/$himmy) (if you're feeling generous).
+If you found this useful, shoot me a tweet ([@shimmb](https://twitter.com/shimmb "My Twitter")) and/or (if you're feeling generous) [buy me a coffee](https://cash.me/$himmy) or better yet, make a donation to a charity (perhaps one that helps people walk?).
 
 Some cleanup / minor changes still outstanding, but everything should work fine.
 ## interday.gs

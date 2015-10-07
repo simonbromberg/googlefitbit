@@ -6,6 +6,9 @@ I have no affiliation with Fitbit
 Simon Bromberg (http://sbromberg.com) 
 
 If you found this useful, shoot me a tweet ([@shimmb](https://twitter.com/shimmb "My Twitter"))
+
+If you run into trouble, please doublecheck the steps **carefully** and check the error log in the script editor before raising issues or seeking help.
+
 Some cleanup / minor changes still outstanding, but everything should work fine.
 ## interday.gs
 Download step data, one row per day, from a start day to the present. Make sure not to set the start day too far in the past.
@@ -71,3 +74,7 @@ var result = UrlFetchApp.fetch("https://api.fitbit.com/1/user/-/activities/heart
 Once you get this request to work, you can generalize and construct the above request dynamically based on user inputs.
  
 PS: I could not find a way to download intra day heart for multiple days through single call. Looks like the call only supports for a single day (too much data to include multiple days I guess). I am thinking about looping the date range and fetching the details multiple times.
+
+I have also uploaded heartrate.gs which is a rough version of a script to download heart rate data.
+
+

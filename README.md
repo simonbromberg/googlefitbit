@@ -1,17 +1,17 @@
 # googlefitbit
 Google scripts for Fitbit data download
 
-## Note Oct 21 2015
-Fitbit has made some changes to its API requiring some minor changes to the scripts. The scripts have been updated already, but if you have a previously authorized script that stopped working, you will need to reset the authorization from the Fitbit menu, and re-authorize with the new permissions selected.
-
-
-I have no affiliation with Fitbit
-
 Simon Bromberg (http://sbromberg.com) 
+(I have no affiliation with Fitbit)
 
 If you found this useful, shoot me a tweet ([@shimmb](https://twitter.com/shimmb "My Twitter"))
 
 If you run into trouble, please doublecheck the steps **carefully** and check the error log in the script editor before raising issues or seeking help.
+
+### Note Oct 21 2015
+Fitbit has made some changes to its API requiring some minor changes to the scripts. The scripts have been updated already, but if you have a previously authorized script that stopped working, you will need to reset the authorization from the Fitbit menu, and re-authorize with the new permissions selected.
+
+
 
 Some cleanup / minor changes still outstanding, but everything should work fine.
 ## interday.gs

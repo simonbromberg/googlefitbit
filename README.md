@@ -50,9 +50,9 @@ Note your OAuth 2.0 Client ID and your Client (Consumer) Secret.
 If I forgot something, or it doesn't work, please let me know.
 
 ## intraday.gs
-Similar setup to interday, except _**you need to [contact Fitbit](mailto:api@fitbit.com "email Fitbit")**_ to ask for access to intraday data. Also menu names are slightly different.
+Similar setup to interday, except _**you need to [contact Fitbit](mailto:api@fitbit.com "email Fitbit")**_ to request access to intraday data. Also the  menu names in the spreadsheet will be slightly different.
+
 Based on this post, http://quantifiedself.com/2014/09/download-minute-fitbit-data/
-Some minor cleanup / changes outstanding (e.g. headers) but should still work.
 
 Note: if you want to get heart rate data follow these additional steps, courtesy of [gthm on the Fitbit forum](https://community.fitbit.com/t5/Web-API/Google-apps-script-for-minute-by-minute-data-stopped-working/m-p/890582/highlight/true#M2685 "Fitbit Forum")
 

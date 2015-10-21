@@ -50,7 +50,7 @@ Note your OAuth 2.0 Client ID and your Client (Consumer) Secret.
 If I forgot something, or it doesn't work, please let me know.
 
 ## intraday.gs
-Similar setup to interday, except you need to contact Fitbit to ask for access to intraday data. Also menu names are slightly different.
+Similar setup to interday, except _**you need to [contact Fitbit](mailto:api@fitbit.com "email Fitbit")**_ to ask for access to intraday data. Also menu names are slightly different.
 Based on this post, http://quantifiedself.com/2014/09/download-minute-fitbit-data/
 Some minor cleanup / changes outstanding (e.g. headers) but should still work.
 

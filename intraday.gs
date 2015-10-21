@@ -1,4 +1,3 @@
-// VERSION 0.2.1 July 23 2015
 // Simon Bromberg (http://sbromberg.com)
 // You are free to use, modify, copy any of the code in this script for your own purposes, as long as it's not for evil
 // If you do anything cool with it, let me know!

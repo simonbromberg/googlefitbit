@@ -1,6 +1,10 @@
 # googlefitbit
 Google scripts for Fitbit data download
 
+## Note Oct 21 2015
+Fitbit has made some changes to its API requiring some minor changes to the scripts. The scripts have been updated already, but if you have a previously authorized script that stopped working, you will need to reset the authorization from the Fitbit menu, and re-authorize with the new permissions selected.
+
+
 I have no affiliation with Fitbit
 
 Simon Bromberg (http://sbromberg.com) 
@@ -76,5 +80,3 @@ Once you get this request to work, you can generalize and construct the above re
 PS: I could not find a way to download intra day heart for multiple days through single call. Looks like the call only supports for a single day (too much data to include multiple days I guess). I am thinking about looping the date range and fetching the details multiple times.
 
 I have also uploaded heartrate.gs which is a rough version of a script to download heart rate data.
-
-

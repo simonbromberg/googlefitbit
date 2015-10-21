@@ -68,7 +68,7 @@ function getFitbitService() {
       // Set the property store where authorized tokens should be persisted.
       .setPropertyStore(PropertiesService.getUserProperties())
 
-      .setScope('activity')
+      .setScope('activity profile settings')
       .setParam('redirect_uri','https://script.google.com/macros/d/'+getProjectKey()+'/usercallback')
       // Forces the approval prompt every time. This is useful for testing,
       // but not desirable in a production application.

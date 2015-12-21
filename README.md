@@ -1,5 +1,5 @@
 # googlefitbit
-Google scripts for Fitbit step data download (other data may work with modification, but this script does not intend to support other endpoints at this time. You are welcome to submit PRs to add additional functionality.)
+Google scripts for Fitbit step data download (other data may work with modification, but this script does not intend to support other endpoints at this time. You are welcome to submit PRs to add additional functionality. There is some code for other loggables in there but that was copied over from an older version of the script.)
 
 http://sbromberg.com
 

@@ -1,15 +1,13 @@
 # googlefitbit
-Google scripts for Fitbit data download
+Google scripts for Fitbit step data download (other data may work with modification, but this script does not intend to support other endpoints at this time. You are welcome to submit PRs to add additional functionality.)
 
-I have no affiliation with Fitbit
+http://sbromberg.com
 
-Simon Bromberg (http://sbromberg.com) 
+If you run into trouble, please double check the steps **carefully** and check the error log in the script editor before raising issues or seeking help.
 
-If you found this useful, shoot me a tweet ([@shimmb](https://twitter.com/shimmb "My Twitter"))
+### Note Oct 21 2015
+Fitbit has made some changes to its API requiring some minor changes to the scripts. The scripts have been updated already, but if you have a previously authorized script that stopped working, you will need to reset the authorization from the Fitbit menu, and re-authorize with the new permissions selected.
 
-If you run into trouble, please doublecheck the steps **carefully** and check the error log in the script editor before raising issues or seeking help.
-
-Some cleanup / minor changes still outstanding, but everything should work fine.
 ## interday.gs
 Download step data, one row per day, from a start day to the present. Make sure not to set the start day too far in the past.
 
@@ -49,9 +47,9 @@ Note your OAuth 2.0 Client ID and your Client (Consumer) Secret.
 If I forgot something, or it doesn't work, please let me know.
 
 ## intraday.gs
-Similar setup to interday, except you need to contact Fitbit to ask for access to intraday data. Also menu names are slightly different.
+Similar setup to interday, except _**you need to [contact Fitbit](mailto:api@fitbit.com "email Fitbit")**_ to request access to intraday data. Also the  menu names in the spreadsheet will be slightly different.
+
 Based on this post, http://quantifiedself.com/2014/09/download-minute-fitbit-data/
-Some minor cleanup / changes outstanding (e.g. headers) but should still work.
 
 Note: if you want to get heart rate data follow these additional steps, courtesy of [gthm on the Fitbit forum](https://community.fitbit.com/t5/Web-API/Google-apps-script-for-minute-by-minute-data-stopped-working/m-p/890582/highlight/true#M2685 "Fitbit Forum")
 
@@ -76,5 +74,3 @@ Once you get this request to work, you can generalize and construct the above re
 PS: I could not find a way to download intra day heart for multiple days through single call. Looks like the call only supports for a single day (too much data to include multiple days I guess). I am thinking about looping the date range and fetching the details multiple times.
 
 I have also uploaded heartrate.gs which is a rough version of a script to download heart rate data.
-
-

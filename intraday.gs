@@ -1,3 +1,6 @@
+// intraday.gs -- Supports downloading intraday (minute-by-minute) step data
+// Will not work without special permission from Fitbit
+
 // Simon Bromberg (http://sbromberg.com)
 // You are free to use, modify, copy any of the code in this script for your own purposes, as long as it's not for evil
 // If you do anything cool with it, let me know!

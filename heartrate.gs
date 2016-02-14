@@ -1,3 +1,6 @@
+// heartrate.gs -- supports downloading heart rate data
+// Intraday data access requires special permission from Fitbit
+
 /*
 * Do not change these key names. These are just keys to access these properties once you set them up by running the Setup function from the Fitbit menu
 */

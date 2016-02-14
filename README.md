@@ -30,9 +30,9 @@ Parts of this script are based on work from the following sources.  The main dif
 4. Go to https://dev.fitbit.com/apps and log in. If you haven't already, register a new app by clicking at the top right. (For OAuth1.0 application type you want Browser, and OAuth2.0 Server. Default access type Read only. Other fields at top you can put whatever you want, just need to put something.)
 Open up the Application Settings for your app and add the following inside the callback url box: 
 
-     https://script.google.com/macros/d/{PROJECT_KEY}/usercallback
+     https://script.google.com/macros/d/YOUR_PROJECT_KEY/usercallback
      
-     (Make sure to replace {PROJECT_KEY} with the project key you got from step 3).
+     (Make sure to replace YOUR_PROJECT_KEY with the project key you got from step 3).
 Note your OAuth 2.0 Client ID and your Client (Consumer) Secret.
 
 5. Inside your spreadsheet, refresh if the Fitbit menu isn't visible at the top. Then hit "Setup" and a popup will show. Copy in the OAuth 2.0 Client ID, Secret, and project key, choose loggables, and a start date (if you try to go more than a couple years back, Fitbit's API will not like you). Hit Save.

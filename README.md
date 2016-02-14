@@ -1,5 +1,5 @@
 # googlefitbit
-Google scripts for Fitbit step data download (other data may work with modification, but this script does not intend to support other endpoints at this time. You are welcome to submit PRs to add additional functionality. There is some code for other loggables in there but that was copied over from an older version of the script.)
+Google scripts for Fitbit step data download (other data may work with modification, but this script does not intend to support other endpoints at this time. You are welcome to submit PRs to add additional functionality. There is some code for other loggables in there but that was copied over from an older version of the script.) You are free to use these scripts for any (non-evil) purpose.
 
 http://sbromberg.com
 
@@ -10,17 +10,9 @@ Fitbit has made some changes to its API requiring some minor changes to the scri
 
 If you run into trouble, please doublecheck the steps **carefully** and check the error log in the script editor before raising issues or seeking help.
 
-### Note Oct 21 2015
-Fitbit has made some changes to its API requiring some minor changes to the scripts. The scripts have been updated already, but if you have a previously authorized script that stopped working, you will need to reset the authorization from the Fitbit menu, and re-authorize with the new permissions selected.
-
 >>>>>>> origin/master
 ## interday.gs
 Download step data, one row per day, from a start day to the present. Make sure not to set the start day too far in the past.
-
-VERSION 0.1.1, July 19 2015
-You are free to use, modify, copy any of the code in this script for your own purposes, as long as it's not for evil
-If you do anything cool with it, let me know!
-Note: there are minor improvements/cleanups still to be made in this file, but it should work as is if everything is setup properly
 
 Parts of this script are based on work from the following sources.  The main difference in my version is that I use Fitbit's new OAuth2 and Google's OAuth2 instead of OAuthConfig which is deprecated.
 

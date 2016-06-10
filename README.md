@@ -1,3 +1,6 @@
+# Note: June 10 2016
+A couple of users have pointed out this is no longer working (get error "Redirect_uri mismatch" after allowing the permissions for your Fitbit account). Currently looking into it. See issue #15.
+
 # googlefitbit
 Google scripts for Fitbit step data download (other data may work with modification, but this script does not intend to support other endpoints at this time. You are welcome to submit PRs to add additional functionality. There is some code for other loggables in there but that was copied over from an older version of the script.) You are free to use these scripts for any (non-evil) purpose.
 
@@ -25,19 +28,26 @@ Parts of this script are based on work from the following sources.  The main dif
 
 3. Find your project's key by (inside script editor) going to File > Project Properties. Copy the long string next to Project Key in the popup. You will need that in subsequent steps. 
 
-4. Go to https://dev.fitbit.com/apps and log in. If you haven't already, register a new app by clicking at the top right. (For OAuth1.0 application type you want 'Browser', and for OAuth2.0 you want 'Server'. Default access type Read only. Other fields at top you can put whatever you want, just need to put something.)
-Open up the Application Settings for your app and add the following inside the callback url box: 
+4. Go to https://dev.fitbit.com/apps and log in. If you haven't already, register a new app by clicking at the top right. 
+- For OAuth 2.0 Application Type select 'Server' [Fitbit now has a 'Personal' option here, further investigation pending]. 
+- Default access type Read only. 
+- Other fields at top: Application Name, Description, Application Website, Organization, Organization Website put whatever you want, just need to put something.
+
+- Add the following inside the callback url box: 
 
      https://script.google.com/macros/d/YOUR_PROJECT_KEY/usercallback
      
-     (Make sure to replace YOUR_PROJECT_KEY with the project key you got from step 3).
-Note your OAuth 2.0 Client ID and your Client (Consumer) Secret.
+     (Replace YOUR_PROJECT_KEY with the project key you got from step 3).
 
-5. Inside your spreadsheet, refresh if the Fitbit menu isn't visible at the top. Then hit "Setup" and a popup will show. Copy in the OAuth 2.0 Client ID, Secret, and project key, choose loggables, and a start date (if you try to go more than a couple years back, Fitbit's API will not like you). Hit Save.
+- Agree to the terms, and tap register. Then you will be directed to a page with credentials. Keep your 'OAuth 2.0 Client ID' and your 'Client Secret' keys handy.
 
-6. In your spreadsheet, click Authorize from the Fitbit menu and a sidebar will show up. Click the link in the sidebar, log in to Fitbit in the new window, authorize the application, and then close the tab when it says "Success you can close this tab"
+5. Inside your spreadsheet (not the script editor; refresh if the Fitbit menu isn't visible at the top), select 'Setup' from the 'Fitbit' menu and a popup window will appear asking you to Authorize your application. Click Continue, sign into / select the Google account you want to authorize the application on (doesn't really matter which account, this has nothing to do with your Fitbit account). Then it will show you the permissions the application is requesting, click 'Allow'. Then the 'Setup Fitbit Download' panel should appear.
 
-7. Back in your spreadhseet, hit Sync, and after a few moments the data should load in.
+6. In the appropriate fields in the 'Setup Fitbit Download' panel copy in your 'OAuth 2.0 Client ID', 'Client Secret' from the previous step, and your project key from step 3. Select 'activities/logs/steps' from the 'Data elements to download' list, and enter a start/end date (defaults to current day). If you try to download more than a couple years worth of data, Fitbit's API will not like you. Then click 'Save Setup' and the panel will disappear.
+
+7. In your spreadsheet, click 'Authorize' from the Fitbit menu and a sidebar will show up on the right. Click the word 'Authorize' in the sidebar. A page will open up with the Fitbit login page. Log in to the Fitbit account you would like to download data from in the new window, authorize the application by clicking 'Allow', and then close the tab when it says "Success you can close this tab"
+
+8. Back in your spreadhseet, hit Sync, and after a few moments the data should load in.
 
 If I forgot something, or it doesn't work, please let me know.
 

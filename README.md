@@ -8,8 +8,6 @@ If you run into trouble, please double check the steps **carefully** and check t
 ### Note Oct 21 2015
 Fitbit has made some changes to its API requiring some minor changes to the scripts. The scripts have been updated already, but if you have a previously authorized script that stopped working, you will need to reset the authorization from the Fitbit menu, and re-authorize with the new permissions selected.
 
-If you run into trouble, please doublecheck the steps **carefully** and check the error log in the script editor before raising issues or seeking help.
-
 ## interday.gs
 Download step data, one row per day, from a start day to the present. Make sure not to set the start day too far in the past.
 

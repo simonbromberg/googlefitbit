@@ -1,5 +1,5 @@
 # Note: June 10 2016
-A couple of users have pointed out this is no longer working (get error "Redirect_uri mismatch" after allowing the permissions for your Fitbit account). Currently looking into it. See issue #15.
+A couple of users have pointed out this is no longer working (get error "Redirect_uri mismatch" after allowing the permissions for your Fitbit account). Currently looking into it. See issue [#15](https://github.com/simonbromberg/googlefitbit/issues/15).
 
 # googlefitbit
 Google scripts for Fitbit step data download (other data may work with modification, but this script does not intend to support other endpoints at this time. You are welcome to submit PRs to add additional functionality. There is some code for other loggables in there but that was copied over from an older version of the script.) You are free to use these scripts for any (non-evil) purpose.

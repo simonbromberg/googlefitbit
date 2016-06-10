@@ -52,7 +52,7 @@ function getFitbitService() {
         setup();
         return;
     }
-    Logger.log(getProjectKey());
+                 
     return OAuth2.createService(SERVICE_IDENTIFIER)
     
     // Set the endpoint URLs, which are the same for all Google services.
@@ -69,16 +69,12 @@ function getFitbitService() {
     
     // Set the property store where authorized tokens should be persisted.
     .setPropertyStore(PropertiesService.getUserProperties())
-    
     .setScope('activity nutrition sleep weight profile settings')
-    .setParam('redirect_uri','https://script.google.com/macros/d/'+getProjectKey()+'/usercallback')
-    // Forces the approval prompt every time. This is useful for testing,
     // but not desirable in a production application.
     //.setParam('approval_prompt', 'force')
     .setTokenHeaders({
         'Authorization': 'Basic ' + Utilities.base64Encode(getConsumerKey() + ':' + getConsumerSecret())
     });
-    
 }
 
 function clearService(){
@@ -98,7 +94,7 @@ function showSidebar() {
         var page = template.evaluate();
         SpreadsheetApp.getUi().showSidebar(page);
     } else {
-        Logger.log("Has access!!!!");
+        Logger.log("Has access!");
     }
 }
 
@@ -134,7 +130,7 @@ function getUser() {
 function setup() {
     var doc = SpreadsheetApp.getActiveSpreadsheet();
     
-    var app = UiApp.createApplication().setTitle("Setup Fitbit Download"); // UiApp API deprecated, may need to eventually replace with HTML servicegtgfttggtggtg
+    var app = UiApp.createApplication().setTitle("Setup Fitbit Download"); // UiApp API deprecated, may need to eventually replace with HTML service
     app.setStyleAttribute("padding", "10px");
     
     var consumerKeyLabel = app.createLabel("Fitbit OAuth 2.0 Client ID:*");
@@ -149,12 +145,9 @@ function setup() {
     consumerSecret.setWidth("100%");
     consumerSecret.setText(getConsumerSecret());
     
-    var projectKeyLabel = app.createLabel("Project key:*");
-    var projectKey = app.createTextBox();
-    projectKey.setName("projectKey");
-    projectKey.setWidth("100%");
-    projectKey.setText(getProjectKey());
-    
+    var projectKeyTitleLabel = app.createLabel("Project key: ");
+    var projectKeyLabel = app.createLabel(ScriptApp.getProjectKey());
+                 
     var firstDate = app.createTextBox().setId("firstDate").setName("firstDate");
     firstDate.setName("firstDate");
     firstDate.setWidth("100%");
@@ -185,17 +178,17 @@ function setup() {
     var saveButton = app.createButton("Save Setup", saveHandler);
     
     // put the controls in a grid
-    var listPanel = app.createGrid(8, 3);
+    var listPanel = app.createGrid(8, 2);
     listPanel.setWidget(1, 0, consumerKeyLabel);
     listPanel.setWidget(1, 1, consumerKey);
     listPanel.setWidget(2, 0, consumerSecretLabel);
     listPanel.setWidget(2, 1, consumerSecret);
-    listPanel.setWidget(3, 0, app.createLabel(" * (obtain these at dev.fitbit.com, use OAuth2.0)"));
-    listPanel.setWidget(4, 0, projectKeyLabel);
-    listPanel.setWidget(4, 1, projectKey);
-    listPanel.setWidget(5, 0, app.createLabel("Start Date for download (yyyy-mm-dd)"));
+    listPanel.setWidget(3, 0, app.createLabel(" * (obtain these at dev.fitbit.com)"));
+    listPanel.setWidget(4, 0, projectKeyTitleLabel);
+    listPanel.setWidget(4, 1, projectKeyLabel);
+    listPanel.setWidget(5, 0, app.createLabel("Start date (yyyy-mm-dd)"));
     listPanel.setWidget(5, 1, firstDate);
-    listPanel.setWidget(6, 0, app.createLabel("End Date for download (yyyy-mm-dd)"));
+    listPanel.setWidget(6, 0, app.createLabel("End date (yyyy-mm-dd)"));
     listPanel.setWidget(6, 1, lastDate);
     listPanel.setWidget(7, 0, app.createLabel("Data Elements to download:"));
     listPanel.setWidget(7, 1, loggables);
@@ -299,7 +292,7 @@ function sync() {
 }
 
 function isConfigured() {
-    return getConsumerKey() != "" && getConsumerSecret() != "" && getProjectKey() != "";
+    return getConsumerKey() != "" && getConsumerSecret() != "";
 }
 
 // function saveSetup saves the setup params from the UI
@@ -336,20 +329,6 @@ function getConsumerKey() {
     }
     
     return consumer;
-}
-
-function setProjectKey(key) {
-    setProperty(PROJECT_KEY_PROPERTY_NAME, key);
-}
-
-function getProjectKey() {
-    var key = getProperty(PROJECT_KEY_PROPERTY_NAME);
-    
-    if (key == null) {
-        key = "";
-    }
-    
-    return key;
 }
 
 function setConsumerSecret(secret) {
@@ -419,7 +398,6 @@ function formatToday() {
 
 // function onOpen is called when the spreadsheet is opened; adds the Fitbit menu
 function onOpen() {
-    Logger.log("open");
     var ss = SpreadsheetApp.getActiveSpreadsheet();
     var menuEntries = [{
                        name: "Sync",

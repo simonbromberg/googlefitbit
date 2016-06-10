@@ -25,7 +25,7 @@ Parts of this script are based on work from the following sources.  The main dif
 
 3. Find your project's key by (inside script editor) going to File > Project Properties. Copy the long string next to Project Key in the popup. You will need that in subsequent steps. 
 
-4. Go to https://dev.fitbit.com/apps and log in. If you haven't already, register a new app by clicking at the top right. (For OAuth1.0 application type you want Browser, and OAuth2.0 Server. Default access type Read only. Other fields at top you can put whatever you want, just need to put something.)
+4. Go to https://dev.fitbit.com/apps and log in. If you haven't already, register a new app by clicking at the top right. (For OAuth1.0 application type you want 'Browser', and for OAuth2.0 you want 'Server'. Default access type Read only. Other fields at top you can put whatever you want, just need to put something.)
 Open up the Application Settings for your app and add the following inside the callback url box: 
 
      https://script.google.com/macros/d/YOUR_PROJECT_KEY/usercallback

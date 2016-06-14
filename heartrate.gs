@@ -8,8 +8,6 @@
 var CONSUMER_KEY_PROPERTY_NAME = "fitbitConsumerKey";
 // Key of ScriptProperty for Fitbit consumer secret.
 var CONSUMER_SECRET_PROPERTY_NAME = "fitbitConsumerSecret";
-// Key of project (inside File > Project Properties)
-var PROJECT_KEY_PROPERTY_NAME = "projectKey";
 
 var SERVICE_IDENTIFIER = 'fitbit';
 var GET_HEART_RATE_DATA = 1; // set this to 0 if you want to do step data instead
@@ -39,7 +37,7 @@ function onOpen() {
 
 
 function isConfigured() {
-    return getConsumerKey() != "" && getConsumerSecret() != "" && getProjectKey() != "";
+    return getConsumerKey() != "" && getConsumerSecret() != "";
 }
 
 function setConsumerKey(key) {
@@ -68,19 +66,6 @@ function getLoggables() {
     return loggable;
 }
 
-
-function setProjectKey(key) {
-  ScriptProperties.setProperty(PROJECT_KEY_PROPERTY_NAME, key);
-}
-
-function getProjectKey() {
-  var key = ScriptProperties.getProperty(PROJECT_KEY_PROPERTY_NAME);
-  if (key == null) {
-    key = "";
-  }
-  return key;
-}
-
 function setConsumerSecret(secret) {
     ScriptProperties.setProperty(CONSUMER_SECRET_PROPERTY_NAME, secret);
 }
@@ -97,7 +82,6 @@ function getConsumerSecret() {
 function saveSetup(e) {
     setConsumerKey(e.parameter.consumerKey);
     setConsumerSecret(e.parameter.consumerSecret);
-    setProjectKey(e.parameter.projectKey);
     setLoggables(e.parameter.loggables);
     setFirstDate(e.parameter.firstDate);
     setLastDate(e.parameter.lastDate);
@@ -149,11 +133,8 @@ function setup() {
     consumerSecret.setWidth("100%");
     consumerSecret.setText(getConsumerSecret());
   
-    var projectKeyLabel = app.createLabel("Project key:*");
-    var projectKey = app.createTextBox();
-    projectKey.setName("projectKey");
-    projectKey.setWidth("100%");
-    projectKey.setText(getProjectKey());
+    var projectKeyTitleLabel = app.createLabel("Project key: ");
+    var projectKeyLabel = app.createLabel(ScriptApp.getProjectKey());
   
     var firstDate = app.createTextBox().setId("firstDate").setName("firstDate");
     firstDate.setName("firstDate");
@@ -175,8 +156,8 @@ function setup() {
     listPanel.setWidget(2, 0, consumerSecretLabel);
     listPanel.setWidget(2, 1, consumerSecret);
     listPanel.setWidget(3, 0, app.createLabel(" * (obtain these at dev.fitbit.com, use OAuth2.0)"));
-    listPanel.setWidget(4, 0, projectKeyLabel);
-    listPanel.setWidget(4, 1, projectKey);
+    listPanel.setWidget(4, 0, projectKeyTitleLabel);
+    listPanel.setWidget(4, 1, projectKeyLabel);
     listPanel.setWidget(5, 0, app.createLabel("Start Date for download (yyyy-mm-dd)"));
     listPanel.setWidget(5, 1, firstDate);
     listPanel.setWidget(6, 0, app.createLabel("End date for download (yyyy-mm-dd)"));
@@ -216,10 +197,7 @@ function getFitbitService() {
       .setPropertyStore(PropertiesService.getUserProperties())
 
       .setScope('activity heartrate profile')
-      .setParam('redirect_uri','https://script.google.com/macros/d/'+getProjectKey()+'/usercallback')
-      // Forces the approval prompt every time. This is useful for testing,
-      // but not desirable in a production application.
-      //.setParam('approval_prompt', 'force')
+      
       .setTokenHeaders({
         'Authorization': 'Basic ' + Utilities.base64Encode(getConsumerKey() + ':' + getConsumerSecret())
       });

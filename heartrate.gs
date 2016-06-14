@@ -29,7 +29,7 @@ function onOpen() {
     functionName: "clearService"
   },
   {
-        name: "Download data",
+        name: "Sync",
     functionName: "refreshTimeSeries"
   }];
     ss.addMenu("Fitbit", menuEntries);

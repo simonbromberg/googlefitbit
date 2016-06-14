@@ -23,17 +23,17 @@ Parts of this script are based on work from the following sources.  The main dif
 3. Find your project's key by clicking on the 'Fitbit' menu inside your spreadsheet and clicking 'Setup'. A popup window may appear asking you to Authorize your application. Click 'Continue', sign into / select the Google account you want to authorize the application on (doesn't really matter which account, this has nothing to do with your Fitbit account). Then it will show you the permissions the application is requesting, click 'Allow'. Then the 'Setup Fitbit Download' panel should appear. Copy the text adjacent to 'Project Key' in the popup. You will need that in subsequent steps.
 
 4. Go to https://dev.fitbit.com/apps and log in. If you haven't already, register a new app by clicking at the top right. 
-- For OAuth 2.0 Application Type select 'Server' [Fitbit now has a 'Personal' option here, further investigation pending]. 
-- Default access type Read only. 
-- Other fields at top: Application Name, Description, Application Website, Organization, Organization Website put whatever you want, just need to put something.
+ - For OAuth 2.0 Application Type select 'Server' [Fitbit now has a 'Personal' option here, further investigation pending]. 
+ - Default access type Read only. 
+ - Other fields at top: Application Name, Description, Application Website, Organization, Organization Website put whatever you want, just need to put something.
 
-- Add the following inside the callback url box: 
+ - Add the following inside the callback url box: 
 
      https://script.google.com/macros/d/YOUR_PROJECT_KEY/usercallback
      
      (Replace YOUR_PROJECT_KEY with the project key you got from step 3).
 
-- Agree to the terms, and tap register. Then you will be directed to a page with credentials. Keep your 'OAuth 2.0 Client ID' and your 'Client Secret' keys handy.
+ - Agree to the terms, and tap register. Then you will be directed to a page with credentials. Keep your 'OAuth 2.0 Client ID' and your 'Client Secret' keys handy.
 
 5. Inside your spreadsheet (not the script editor; refresh if the Fitbit menu isn't visible at the top), select 'Setup' from the 'Fitbit' menu. In the appropriate fields in the 'Setup Fitbit Download' panel copy in your 'OAuth 2.0 Client ID', 'Client Secret' from the previous step, and your project key from step 3. Select 'activities/logs/steps' from the 'Data elements to download' list, and enter a start/end date (defaults to current day). If you try to download more than a couple years worth of data, Fitbit's API will not like you. Then click 'Save Setup' and the panel will disappear.
 
@@ -41,10 +41,8 @@ Parts of this script are based on work from the following sources.  The main dif
 
 8. Back in your spreadhseet, hit Sync, and after a few moments the data should load in.
 
-If I forgot something, or it doesn't work, please let me know.
-
 ## intraday.gs
-Similar setup to interday, except _**you need to [contact Fitbit](mailto:api@fitbit.com "email Fitbit")**_ to request access to intraday data. Also the  menu names in the spreadsheet will be slightly different.
+Similar setup to interday, except _**you need to [contact Fitbit](mailto:api@fitbit.com "email Fitbit")**_ to request access to intraday data. Also the  menu names in the spreadsheet will be slightly different. [Apparently Fitbit now has a Personal mode, which you can get intraday data with. Presumably this is limited to a single authorization though.]
 
 Based on this post, http://quantifiedself.com/2014/09/download-minute-fitbit-data/
 
@@ -57,14 +55,14 @@ In function getFitbitService() { // updated the below line
  
 2) Update the activities and intradays variables accordingly
  
-var activities = ["activities/heart"];
-var intradays = ["activities-heart-intraday"];
+`var activities = ["activities/heart"];`
+`var intradays = ["activities-heart-intraday"];`
  
 3) Request the proper URL for heart rate. The API docs are not clear enought, especially near the URL templates. I got the last template of the API docs working for heart rate.
  
 It was easier for me to hardcode the URL so I just replaced the featch call with this
  
-var result = UrlFetchApp.fetch("https://api.fitbit.com/1/user/-/activities/heart/date/2015-07-07/1d/1sec/time/00:00/23:59.json", options);
+`var result = UrlFetchApp.fetch("https://api.fitbit.com/1/user/-/activities/heart/date/2015-07-07/1d/1sec/time/00:00/23:59.json", options);`
  
 Once you get this request to work, you can generalize and construct the above request dynamically based on user inputs.
  

@@ -299,7 +299,6 @@ function isConfigured() {
 function saveSetup(e) {
     setConsumerKey(e.parameter.consumerKey);
     setConsumerSecret(e.parameter.consumerSecret);
-    setProjectKey(e.parameter.projectKey);
     setLoggables(e.parameter.loggables);
     setFirstDate(e.parameter.firstDate);
     setLastDate(e.parameter.lastDate);

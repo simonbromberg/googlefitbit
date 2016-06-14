@@ -22,8 +22,6 @@
 var CONSUMER_KEY_PROPERTY_NAME = "fitbitConsumerKey";
 // Key of ScriptProperty for Fitbit consumer secret.
 var CONSUMER_SECRET_PROPERTY_NAME = "fitbitConsumerSecret";
-// Key of project (inside File > Project Properties)
-var PROJECT_KEY_PROPERTY_NAME = "projectKey";
 
 /*
  * You also need to add the callback URL to your app at dev.fitbit.com in the following format (replace {PROJECT KEY} with your project key:

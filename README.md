@@ -23,7 +23,7 @@ Parts of this script are based on work from the following sources.  The main dif
 3. Find your project's key by clicking on the 'Fitbit' menu inside your spreadsheet and clicking 'Setup'. A popup window may appear asking you to Authorize your application. Click 'Continue', sign into / select the Google account you want to authorize the application on (doesn't really matter which account, this has nothing to do with your Fitbit account). Then it will show you the permissions the application is requesting, click 'Allow'. Then the 'Setup Fitbit Download' panel should appear. Copy the text adjacent to 'Project Key' in the popup. You will need that in subsequent steps.
 
 4. Go to https://dev.fitbit.com/apps and log in. If you haven't already, register a new app by clicking at the top right. 
- - For OAuth 2.0 Application Type select 'Server' [Fitbit now has a 'Personal' option here, further investigation pending]. 
+ - For OAuth 2.0 Application Type select 'Server' [Fitbit now has a 'Personal' option here which will give you access to intraday data but will only allow you to authorize a single personal account; [more info here](https://community.fitbit.com/t5/Web-API/Intraday-data-now-immediately-available-to-personal-apps/td-p/1014524 "Fitbit community forum")]. 
  - Default access type Read only. 
  - Other fields at top: Application Name, Description, Application Website, Organization, Organization Website put whatever you want, just need to put something.
 
@@ -42,9 +42,9 @@ Parts of this script are based on work from the following sources.  The main dif
 8. Back in your spreadhseet, hit Sync, and after a few moments the data should load in.
 
 ## intraday.gs
-Similar setup to interday, except _**you need to [contact Fitbit](mailto:api@fitbit.com "email Fitbit")**_ to request access to intraday data. Also the  menu names in the spreadsheet will be slightly different. [Apparently Fitbit now has a Personal mode, which you can get intraday data with. Presumably this is limited to a single authorization though.]
+Similar setup to interday, except _**you need to [contact Fitbit](mailto:api@fitbit.com "email Fitbit")**_ to request access to intraday data. Also the  menu names in the spreadsheet will be slightly different. If you're just developing for a single personal Fitbit account, you can also use the new Personal application type instead of Server, which you can get intraday data with. [More information here](https://community.fitbit.com/t5/Web-API/Intraday-data-now-immediately-available-to-personal-apps/td-p/1014524).
 
-Based on this post, http://quantifiedself.com/2014/09/download-minute-fitbit-data/
+Intraday script is based on [this post](http://quantifiedself.com/2014/09/download-minute-fitbit-data/).
 
 Note: if you want to get heart rate data follow these additional steps, courtesy of [gthm on the Fitbit forum](https://community.fitbit.com/t5/Web-API/Google-apps-script-for-minute-by-minute-data-stopped-working/m-p/890582/highlight/true#M2685 "Fitbit Forum")
 
@@ -66,6 +66,6 @@ It was easier for me to hardcode the URL so I just replaced the featch call with
  
 Once you get this request to work, you can generalize and construct the above request dynamically based on user inputs.
  
-PS: I could not find a way to download intra day heart for multiple days through single call. Looks like the call only supports for a single day (too much data to include multiple days I guess). I am thinking about looping the date range and fetching the details multiple times.
+NOTE: I could not find a way to download intraday heart for multiple days through single call. Looks like the call only supports for a single day (too much data to include multiple days I guess). I am thinking about looping the date range and fetching the details multiple times.
 
 I have also uploaded heartrate.gs which is a rough version of a script to download heart rate data.

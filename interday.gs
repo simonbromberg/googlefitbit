@@ -38,8 +38,15 @@ var LOGGABLES = ["activities/log/steps", "activities/log/distance",
                  "activities/log/minutesSedentary",
                  "activities/log/minutesLightlyActive",
                  "activities/log/minutesFairlyActive",
-                 "activities/log/minutesVeryActive", "sleep/timeInBed",
-                 "sleep/minutesAsleep", "sleep/minutesAwake", "sleep/awakeningsCount",
+                 "activities/log/minutesVeryActive", 
+                 "sleep/startTime",  
+                 "sleep/timeInBed",  
+                 "sleep/minutesAsleep",  
+                 "sleep/awakeningsCount",  
+                 "sleep/minutesAwake",  
+                 "sleep/minutesToFallAsleep",  
+                 "sleep/minutesAfterWakeup",  
+                 "sleep/efficiency",
                  "body/weight", "body/bmi", "body/fat",];
 
 function getFitbitService() {

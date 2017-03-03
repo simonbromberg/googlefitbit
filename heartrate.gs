@@ -306,44 +306,49 @@ function refreshTimeSeries() {
 	 	date = parseDate(dateString);
         var table = new Array();
 	    while (1) {
-        	var currentActivity = activities[activity];
-        	try {
-              var result = UrlFetchApp.fetch(getFetchString(dateString), options);
-        	} catch(exception) {
-            	Logger.log(exception);
-        	}
-        	var o = JSON.parse(result.getContentText());
-          Logger.log(o);
-                    Logger.log(intradays);
-          Logger.log(o[intradays[activity]]);
-        	var cell = doc.getRange('a3');
-        	var titleCell = doc.getRange("a2");
-        	titleCell.setValue("Date");
-        	var title = currentActivity.split("/");
-        	title = title[title.length - 1];
-        	titleCell.offset(0, 1 + activity * 1.0).setValue(title);
-            var row = o[intradays[activity]]["dataset"];
-    	  	for (var j in row) {
-            	var val = row[j];
-                var arr = new Array(2);
-                arr[0] = dateString + ' ' + val["time"];
-                arr[1] = val["value"];
-                table.push(arr);
-              // set the value index index
-               index++;
-           }
-	  			date.setDate(date.getDate()+1);
-  				dateString = Utilities.formatDate(date, "GMT", "yyyy-MM-dd");
-  				if (dateString > getLastDate()) {
-  					break;
-  				}
+          var currentActivity = activities[activity];
+          try {
+            var result = UrlFetchApp.fetch(getFetchString(dateString), options);
+          } catch(exception) {
+            Logger.log(exception);
+          }
+          var o = JSON.parse(result.getContentText());
 
+          var cell = doc.getRange('a3');
+          var titleCell = doc.getRange("a2");
+          titleCell.setValue("Date");
+          var title = currentActivity.split("/");
+          title = title[title.length - 1];
+          titleCell.offset(0, 1 + activity * 1.0).setValue(title);
+          var row = o[intradays[activity]]["dataset"];
+
+          for (var j in row) {
+            var val = row[j];
+            var arr = new Array(2);
+            arr[0] = dateString + ' ' + val["time"];
+            arr[1] = val["value"];
+            table.push(arr);
+            // set the value index index
+            index++;
+          }
+
+          date.setDate(date.getDate()+1);
+          dateString = Utilities.formatDate(date, "GMT", "yyyy-MM-dd");
+          if (dateString > getLastDate()) {
+            break;
+          }
         }
       
+      Logger.log("Found " + table.length + " rows");
+      if (table.length == 0) {
+        SpreadsheetApp.getUi().alert('No data in the time range');
+        return;
+      }
       // Batch set values of table, much faster than doing each time per loop run, this wouldn't work as is if there were multiple activities being listed
-          doc.getRange("A3:B"+(table.length+2)).setValues(table);
+      doc.getRange("A3:B"+(table.length+2)).setValues(table);
 	}
 }
+
 // parse a date in yyyy-mm-dd format
 function parseDate(input) {
   var parts = input.match(/(\d+)/g);

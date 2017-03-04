@@ -8,7 +8,16 @@
 // Read instructions first on above URL
 //
 // See here for an example for the data it produces: https://docs.google.com/spreadsheets/d/1wCnUg6zMc930jji3T_lUGSs9XJ8jkVVHGSzXFyuv-7I/edit#gid=1507130755
-// The heart rate activity always needs to be last if you edit the activities array!
+
+
+// Change activities if you want more stuff
+// The heart rate activity always needs to be last!
+
+var activities = ["activities/steps", "activities/calories", "activities/floors","activities/distance", "activities/heart"];
+
+// Set the sheet name where data will be downloaded. Nothing else should be in this sheet
+
+var mySheetName = "Sheet1"
 
 
 /*
@@ -20,7 +29,6 @@ var CONSUMER_KEY_PROPERTY_NAME = "fitbitConsumerKey";
 var CONSUMER_SECRET_PROPERTY_NAME = "fitbitConsumerSecret";
 
 var SERVICE_IDENTIFIER = 'fitbit';
-
 function onOpen() {
     var ss = SpreadsheetApp.getActiveSpreadsheet();
     var menuEntries = [{
@@ -104,7 +112,7 @@ function setFirstDate(firstDate) {
 function getFirstDate() {
     var firstDate = ScriptProperties.getProperty("firstDate");
     if (firstDate == null) {
-        firstDate = "2012-01-01";
+        firstDate = "today";
     }
     return firstDate;
 }
@@ -247,13 +255,11 @@ function refreshTimeSeries() {
         setup();
         return;
     }
-    //    var user = getUser();
-    var doc = SpreadsheetApp.getActiveSpreadsheet();
-    var sheet = doc.getSheetByName("Sheet1");
+
+    var doc = SpreadsheetApp.getActiveSpreadsheet()
+    var sheet = doc.getSheetByName(mySheetName);
     sheet.clear();
-    doc.setFrozenRows(1);
-    // two header rows
-    //    doc.getRange("a1").setValue(user.fullName);
+    sheet.setFrozenRows(1);
 
     var options = {
         headers: {
@@ -261,14 +267,13 @@ function refreshTimeSeries() {
             "method": "GET"
         }
     };
-    var activities = ["activities/steps", "activities/calories", "activities/floors", "activities/heart"];
+    
 
     var lastIndex = 0;
     var table = {};
     for (var activity in activities) {
 
         var dateString = getFirstDate();
-        //date = parseDate(dateString);
 
         var currentActivity = activities[activity];
         try {
@@ -282,9 +287,9 @@ function refreshTimeSeries() {
         }
         var o = JSON.parse(result.getContentText());
         //Logger.log(result.getContentText())
-        var cell = doc.getRange('a2');
-        var titleCell = doc.getRange("a1");
-        titleCell.setValue("Date");
+
+        var titleCell = sheet.getRange("a1");
+        titleCell.setValue("Time");
         var title = currentActivity.split("/");
         title = title[title.length - 1];
         titleCell.offset(0, 1 + activity * 1.0).setValue(title);
@@ -324,7 +329,7 @@ function refreshTimeSeries() {
 
 
     var range = "R2C1:R" + (tablearray.length + 1) + "C" + al
-    doc.getRange(range).setValues(tablearray);
+    sheet.getRange(range).setValues(tablearray);
 }
 // parse a date in yyyy-mm-dd format
 function parseDate(input) {

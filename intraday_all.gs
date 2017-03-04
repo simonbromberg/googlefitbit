@@ -7,7 +7,7 @@
 // Based on https://github.com/simonbromberg/googlefitbit intraday.gs
 // Read instructions first on above URL
 //
-// See here for an example for the data it produces: https://docs.google.com/spreadsheets/d/1wCnUg6zMc930jji3T_lUGSs9XJ8jkVVHGSzXFyuv-7I/edit?usp=sharing
+// See here for an example for the data it produces: https://docs.google.com/spreadsheets/d/1wCnUg6zMc930jji3T_lUGSs9XJ8jkVVHGSzXFyuv-7I/edit#gid=1507130755
 // The heart rate activity always needs to be last if you edit the activities array!
 
 

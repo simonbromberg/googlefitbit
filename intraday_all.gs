@@ -281,11 +281,11 @@ function refreshTimeSeries() {
 
         var currentActivity = activities[activity];
         if (currentActivity == "activities/steps") {
-            stepsColumn = parseInt(activity);
+            stepsColumn = parseInt(activity) + 1;
         }
         try {
             if (currentActivity == 'activities/heart') {
-                heartColumn = parseInt(activity);
+                heartColumn = parseInt(activity) + 1;
                 var result = UrlFetchApp.fetch("https://api.fitbit.com/1/user/-/activities/heart/date/" + dateString + "/1d/1min.json", options);
             } else {
                 var result = UrlFetchApp.fetch("https://api.fitbit.com/1/user/-/" + currentActivity + "/date/" + dateString + "/1d.json", options);
@@ -329,7 +329,7 @@ function refreshTimeSeries() {
         }
 
     });
-
+    Logger.log(stepsColumn)
     //Convert the object to an array - setValues needs an array
     var tablearray = Object.keys(table).map(function(key) {
         return table[key];

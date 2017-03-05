@@ -8,16 +8,17 @@
 // Read instructions first on above URL
 //
 // See here for an example for the data it produces: https://docs.google.com/spreadsheets/d/1wCnUg6zMc930jji3T_lUGSs9XJ8jkVVHGSzXFyuv-7I/edit#gid=1507130755
-
-
 // Change activities if you want more stuff
 // The heart rate activity always needs to be last!
-
-var activities = ["activities/steps", "activities/calories", "activities/floors","activities/distance", "activities/heart"];
+var activities = ["activities/steps", "activities/calories", "activities/floors", "activities/distance", "activities/heart"];
 
 // Set the sheet name where data will be downloaded. Nothing else should be in this sheet
 
 var mySheetName = "Sheet1"
+
+// If you want want to filter out empty rows from the data, set this to true. If heartrate or steps is zero, the row is considered empty.
+
+var filterEmptyRows = true;
 
 
 /*
@@ -29,6 +30,9 @@ var CONSUMER_KEY_PROPERTY_NAME = "fitbitConsumerKey";
 var CONSUMER_SECRET_PROPERTY_NAME = "fitbitConsumerSecret";
 
 var SERVICE_IDENTIFIER = 'fitbit';
+var heartColumn = 0;
+var stepsColumn = 0;
+
 function onOpen() {
     var ss = SpreadsheetApp.getActiveSpreadsheet();
     var menuEntries = [{
@@ -267,7 +271,7 @@ function refreshTimeSeries() {
             "method": "GET"
         }
     };
-    
+
 
     var lastIndex = 0;
     var table = {};
@@ -276,8 +280,12 @@ function refreshTimeSeries() {
         var dateString = getFirstDate();
 
         var currentActivity = activities[activity];
+        if (currentActivity == "activities/steps") {
+            stepsColumn = parseInt(activity);
+        }
         try {
             if (currentActivity == 'activities/heart') {
+                heartColumn = parseInt(activity);
                 var result = UrlFetchApp.fetch("https://api.fitbit.com/1/user/-/activities/heart/date/" + dateString + "/1d/1min.json", options);
             } else {
                 var result = UrlFetchApp.fetch("https://api.fitbit.com/1/user/-/" + currentActivity + "/date/" + dateString + "/1d.json", options);
@@ -325,6 +333,12 @@ function refreshTimeSeries() {
     //Convert the object to an array - setValues needs an array
     var tablearray = Object.keys(table).map(function(key) {
         return table[key];
+    }).filter(function(currarr) { //Do the filtering
+        if (filterEmptyRows) {
+            return (currarr[heartColumn] > 0 || currarr[stepsColumn] > 0)
+        } else {
+            return true;
+        }
     });
 
 

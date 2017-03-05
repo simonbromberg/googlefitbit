@@ -14,7 +14,7 @@ var activities = ["activities/steps", "activities/calories", "activities/floors"
 
 // Set the sheet name where data will be downloaded. Nothing else should be in this sheet
 
-var mySheetName = "Sheet1"
+var mySheetName = "Sheet1";
 
 // If you want want to filter out empty rows from the data, set this to true. If heartrate or steps is zero, the row is considered empty.
 
@@ -24,14 +24,14 @@ var filterEmptyRows = true;
 /*
  * Do not change these key names. These are just keys to access these properties once you set them up by running the Setup function from the Fitbit menu
  */
-// Key of ScriptProperty for Firtbit consumer key.
+// Key of userProperties for Firtbit consumer key.
 var CONSUMER_KEY_PROPERTY_NAME = "fitbitConsumerKey";
-// Key of ScriptProperty for Fitbit consumer secret.
+// Key of userProperties for Fitbit consumer secret.
 var CONSUMER_SECRET_PROPERTY_NAME = "fitbitConsumerSecret";
 
 var SERVICE_IDENTIFIER = 'fitbit';
-var heartColumn = 0;
-var stepsColumn = 0;
+
+var userProperties = PropertiesService.getUserProperties();
 
 function onOpen() {
     var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -61,11 +61,11 @@ function isConfigured() {
 }
 
 function setConsumerKey(key) {
-    ScriptProperties.setProperty(CONSUMER_KEY_PROPERTY_NAME, key);
+    userProperties.setProperty(CONSUMER_KEY_PROPERTY_NAME, key);
 }
 
 function getConsumerKey() {
-    var key = ScriptProperties.getProperty(CONSUMER_KEY_PROPERTY_NAME);
+    var key = userProperties.getProperty(CONSUMER_KEY_PROPERTY_NAME);
     if (key == null) {
         key = "";
     }
@@ -73,11 +73,11 @@ function getConsumerKey() {
 }
 
 function setLoggables(loggable) {
-    ScriptProperties.setProperty("loggables", loggable);
+    userProperties.setProperty("loggables", loggable);
 }
 
 function getLoggables() {
-    var loggable = ScriptProperties.getProperty("loggables");
+    var loggable = userProperties.getProperty("loggables");
     if (loggable == null) {
         loggable = LOGGABLES;
     } else {
@@ -87,11 +87,11 @@ function getLoggables() {
 }
 
 function setConsumerSecret(secret) {
-    ScriptProperties.setProperty(CONSUMER_SECRET_PROPERTY_NAME, secret);
+    userProperties.setProperty(CONSUMER_SECRET_PROPERTY_NAME, secret);
 }
 
 function getConsumerSecret() {
-    var secret = ScriptProperties.getProperty(CONSUMER_SECRET_PROPERTY_NAME);
+    var secret = userProperties.getProperty(CONSUMER_SECRET_PROPERTY_NAME);
     if (secret == null) {
         secret = "";
     }
@@ -110,11 +110,11 @@ function saveSetup(e) {
 }
 
 function setFirstDate(firstDate) {
-    ScriptProperties.setProperty("firstDate", firstDate);
+    userProperties.setProperty("firstDate", firstDate);
 }
 
 function getFirstDate() {
-    var firstDate = ScriptProperties.getProperty("firstDate");
+    var firstDate = userProperties.getProperty("firstDate");
     if (firstDate == null) {
         firstDate = "today";
     }
@@ -240,20 +240,6 @@ function authCallback(request) {
     }
 }
 
-function getUser() {
-    var service = getFitbitService();
-
-    var options = {
-        headers: {
-            "Authorization": "Bearer " + service.getAccessToken(),
-            "method": "GET"
-        }
-    };
-    var response = UrlFetchApp.fetch("https://api.fitbit.com/1/user/-/profile.json", options);
-    var o = JSON.parse(response.getContentText());
-    return o.user;
-}
-
 function refreshTimeSeries() {
     if (!isConfigured()) {
         setup();
@@ -272,20 +258,22 @@ function refreshTimeSeries() {
         }
     };
 
-
-    var lastIndex = 0;
     var table = {};
+
+    var titleCell = sheet.getRange("a1");
+    titleCell.setValue("Time");
+
     for (var activity in activities) {
 
         var dateString = getFirstDate();
 
         var currentActivity = activities[activity];
         if (currentActivity == "activities/steps") {
-            stepsColumn = parseInt(activity) + 1;
+            var stepsColumn = parseInt(activity) + 1;
         }
         try {
             if (currentActivity == 'activities/heart') {
-                heartColumn = parseInt(activity) + 1;
+                var heartColumn = parseInt(activity) + 1;
                 var result = UrlFetchApp.fetch("https://api.fitbit.com/1/user/-/activities/heart/date/" + dateString + "/1d/1min.json", options);
             } else {
                 var result = UrlFetchApp.fetch("https://api.fitbit.com/1/user/-/" + currentActivity + "/date/" + dateString + "/1d.json", options);
@@ -296,11 +284,8 @@ function refreshTimeSeries() {
         var o = JSON.parse(result.getContentText());
         //Logger.log(result.getContentText())
 
-        var titleCell = sheet.getRange("a1");
-        titleCell.setValue("Time");
-        var title = currentActivity.split("/");
-        title = title[title.length - 1];
-        titleCell.offset(0, 1 + activity * 1.0).setValue(title);
+        var title = currentActivity.split("/")[1];
+        titleCell.offset(0, 1 + parseInt(activity)).setValue(title);
         var intradaysfield = "activities-" + title + "-intraday"
         var row = o[intradaysfield]["dataset"];
 
@@ -323,37 +308,28 @@ function refreshTimeSeries() {
     //Pad the array - setValues needs a value in each field
     Object.keys(table).forEach(function(key) {
         var tl = table[key].length
-        //Logger.log(tl + " " + al)
         if (tl < al) {
             table[key].push(0)
         }
 
     });
-    Logger.log(stepsColumn)
+
     //Convert the object to an array - setValues needs an array
     var tablearray = Object.keys(table).map(function(key) {
         return table[key];
-    }).filter(function(currarr) { //Do the filtering
-        if (filterEmptyRows) {
-            return (currarr[heartColumn] > 0 || currarr[stepsColumn] > 0)
-        } else {
-            return true;
-        }
-    });
+    })
+    
+    if (filterEmptyRows) {
+      tablearray = tablearray.filter(function(currarr) { 
+              return (currarr[heartColumn] > 0 || currarr[stepsColumn] > 0);
+       });
+    }
 
 
     var range = "R2C1:R" + (tablearray.length + 1) + "C" + al
-    sheet.getRange(range).setValues(tablearray);
-}
-// parse a date in yyyy-mm-dd format
-function parseDate(input) {
-    var parts = input.match(/(\d+)/g);
-    // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
-    return new Date(parts[0], parts[1] - 1, parts[2]); // months are 0-based
-}
-
-// parse a date in 2011-10-25T23:57:00.000 format
-function parseDate2(input) {
-    var parts = input.match(/(\d+)/g);
-    return new Date(parts[0], parts[1] - 1, parts[2], parts[3], parts[4]);
+    if (tablearray[1]) {
+      sheet.getRange(range).setValues(tablearray);
+    } else {
+       SpreadsheetApp.getUi().alert('No data found for chosen day: '+dateString);
+    }
 }

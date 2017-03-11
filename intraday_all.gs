@@ -7,7 +7,6 @@
 // Based on https://github.com/simonbromberg/googlefitbit intraday.gs
 // Read instructions first on above URL
 //
-// See here for an example for the data it produces: https://docs.google.com/spreadsheets/d/1wCnUg6zMc930jji3T_lUGSs9XJ8jkVVHGSzXFyuv-7I/edit#gid=1507130755
 // Change activities if you want more stuff
 // The heart rate activity always needs to be last!
 var activities = ["activities/steps", "activities/calories", "activities/floors", "activities/distance", "activities/heart"];
@@ -16,7 +15,7 @@ var activities = ["activities/steps", "activities/calories", "activities/floors"
 
 var mySheetName = "Sheet1";
 
-// If you want want to filter out empty rows from the data, set this to true. If heartrate or steps is zero, the row is considered empty.
+// If you want want to filter out empty rows from the data, set this to true. If heartrate and steps is zero, the row is considered empty.
 
 var filterEmptyRows = true;
 
@@ -246,9 +245,11 @@ function refreshTimeSeries() {
         return;
     }
 
-    var doc = SpreadsheetApp.getActiveSpreadsheet()
+    var doc = SpreadsheetApp.getActiveSpreadsheet();
     var sheet = doc.getSheetByName(mySheetName);
+    var lastrow = sheet.getMaxRows();
     sheet.clear();
+    if (lastrow > 3) { sheet.deleteRows(2, lastrow -2); }
     sheet.setFrozenRows(1);
 
     var options = {

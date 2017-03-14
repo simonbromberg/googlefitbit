@@ -18,7 +18,7 @@ Parts of this script are based on work from the following sources.  The main dif
 ### Setting up:
 1. Create a **new** Google spreadsheet (do not try to re-use one with the old version of the script), click Tools > Script editor... then copy and paste the contents of the interday.gs file (see above) into the script editor and save. Return to the spreadsheet and refresh the page (Note: actually click the refresh button or select it from the menu; the keyboard shortcut is overriden on Google Sheets, at least in Google Chrome). A couple seconds after the page reloads you should see a "Fitbit" menu at the top.
 
-2. Add the Oauth2 Google Script library to your project by clicking Resources > Libraries... (menus inside the script editor). Then search for the OAuth2.0 library by typing in the project key "MswhXl8fVhTFUH_Q3UOJbXvxhMjh3Sh48" and hitting Select. More info on that library on [its Github page](https://github.com/googlesamples/apps-script-oauth2 "apps-script-oauth2"). Select the latest version and click Save.
+2. Add the Oauth2 Google Script library to your project by clicking Resources > Libraries... (menus inside the script editor). Then search for the OAuth2.0 library by typing in the Script ID "MswhXl8fVhTFUH_Q3UOJbXvxhMjh3Sh48" and hitting Select. More info on that library on [its Github page](https://github.com/googlesamples/apps-script-oauth2 "apps-script-oauth2"). Select the latest version and click Save.
 
 3. Find your project's key by clicking on the 'Fitbit' menu inside your spreadsheet and clicking 'Setup'. A popup window may appear asking you to Authorize your application. Click 'Continue', sign into / select the Google account you want to authorize the application on (doesn't really matter which account, this has nothing to do with your Fitbit account). Then it will show you the permissions the application is requesting, click 'Allow'. Then the 'Setup Fitbit Download' panel should appear. Copy the text adjacent to 'Project Key' in the popup. You will need that in subsequent steps.
 
@@ -69,3 +69,17 @@ Once you get this request to work, you can generalize and construct the above re
 NOTE: I could not find a way to download intraday heart for multiple days through single call. Looks like the call only supports for a single day (too much data to include multiple days I guess). I am thinking about looping the date range and fetching the details multiple times.
 
 I have also uploaded heartrate.gs which is a rough version of a script to download heart rate data.
+
+## intraday_all.gs
+
+See the instructions from intraday.gs
+
+This version was created 2017-03-08. It supports downloading steps, calories, heartrate and other intraday data into one sheet. Time interval is by design one minute and cannot be changed with this version.
+
+Configure the sheet name where you want the data to be saved inside the script. By default it is "Sheet1" and if you create a sheet with that name no script changes are needed.
+
+This version retrieves one day per execution so no range can be specified, only a singular date.
+
+Here you can see an example of the data it produces and some example charts:
+https://docs.google.com/spreadsheets/d/1chREgu98XGocOM8mHyTvbUMlKG_-NfFXsLYHvwq9Dv8/edit#gid=1507130755
+

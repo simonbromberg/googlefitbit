@@ -40,6 +40,8 @@ Parts of this script are based on work from the following sources. The main diff
 8. Back in your spreadhseet, hit Sync, and after a few moments the data should load in.
 
 ## intraday.gs
+Download minute-by-minute step data.
+
 Similar setup to interday, except _**you need to [contact Fitbit](mailto:api@fitbit.com "email Fitbit")**_ to request access to intraday data. Also the  menu names in the spreadsheet will be slightly different. If you're just developing for a single personal Fitbit account, you can also use the new Personal application type instead of Server, which you can get intraday data with. [More information here](https://community.fitbit.com/t5/Web-API/Intraday-data-now-immediately-available-to-personal-apps/td-p/1014524).
 
 Intraday script is based on [this post](http://quantifiedself.com/2014/09/download-minute-fitbit-data/).

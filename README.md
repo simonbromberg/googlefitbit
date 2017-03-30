@@ -6,7 +6,7 @@ Google scripts for Fitbit step data / heart rate interday / intraday download (o
 ## interday.gs
 Download step data, one row per day, from a start day to the present. Make sure not to set the start day too far in the past.
 
-Parts of this script are based on work from the following sources.  The main difference in my version is that I use Fitbit's new OAuth2 and Google's OAuth2 instead of OAuthConfig which is deprecated.
+Parts of this script are based on work from the following sources. The main difference in my version is that I use Fitbit's new OAuth2 and Google's OAuth2 instead of OAuthConfig which is deprecated.
 
 - Original script by loghound@gmail.com
 - Original instructional video by Ernesto Ramirez at http://vimeo.com/26338767

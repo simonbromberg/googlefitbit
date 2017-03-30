@@ -1,9 +1,7 @@
 # googlefitbit
 Google scripts for Fitbit step data download (other data may work with modification, but this script does not intend to support other endpoints at this time. You are welcome to submit PRs to add additional functionality. There is some code for other loggables in there but that was copied over from an older version of the script.) You are free to use these scripts for any (non-evil) purpose.
 
-http://sbromberg.com
-
-If you run into trouble, please double check the steps **carefully** and check the error log in the script editor before raising issues or seeking help.
+**Important Note:** If you run into trouble, please double check the steps **carefully** and check the error log in the script editor before raising issues or seeking help. If you find anything in this _Readme_ confusing, please raise an issue in Github. Please be as specific as possible with any questions.
 
 ## interday.gs
 Download step data, one row per day, from a start day to the present. Make sure not to set the start day too far in the past.
@@ -82,4 +80,3 @@ This version retrieves one day per execution so no range can be specified, only 
 
 Here you can see an example of the data it produces and some example charts:
 https://docs.google.com/spreadsheets/d/1chREgu98XGocOM8mHyTvbUMlKG_-NfFXsLYHvwq9Dv8/edit#gid=1507130755
-

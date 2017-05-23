@@ -1,7 +1,13 @@
 # googlefitbit
 Google scripts for Fitbit step data / heart rate interday / intraday download (other data may work with modification, but this script does not intend to support other endpoints at this time. You are welcome to submit PRs to add additional functionality. There is some code for other loggables in there but that was copied over from an older version of the script.) You are free to use, duplicate, and/or modify these scripts for any (non-evil) purpose.
 
-**Important Note:** If you run into trouble, please double check the steps **carefully** and check the error log in the script editor before raising issues or seeking help. If you find anything in this _Readme_ confusing, please raise an issue in Github. Please be as specific as possible with any questions.
+**Important Notes:** If you run into trouble, please double check the steps **carefully** and check the error log in the script editor before raising issues or seeking help. If you find anything in this _Readme_ confusing, please raise an issue in Github. Please be as specific as possible with any questions.
+
+If you are seeing this error "_The app you're trying to connect did not provide valid information to Fitbit. Please report this issue to them_."
+
+And "_Developer information: invalidrequest - Invalid redirecturi parameter value_"
+
+That means you did not follow the instructions correctly.
 
 ## interday.gs
 Download step data, one row per day, from a start day to the present. Make sure not to set the start day too far in the past.

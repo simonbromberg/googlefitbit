@@ -1,5 +1,7 @@
 # googlefitbit
-Google scripts for Fitbit step data / heart rate interday / intraday download (other data may work with modification, but this script does not intend to support other endpoints at this time. You are welcome to submit PRs to add additional functionality or fix problems. There is some code for other loggables in there but that was copied over from an older version of the script.) You are free to use, duplicate, and/or modify these scripts for any (non-evil) purpose. These scrips are provided as-is and are not being actively maintained.
+Google scripts for Fitbit step data / heart rate interday / intraday download (other data may work with modification, but this script does not intend to support other endpoints at this time. You are welcome to submit PRs to add additional functionality or fix problems. There is some code for other loggables in there but that was copied over from an older version of the script.) You are free to use, duplicate, and/or modify these scripts for any (non-evil) purpose. 
+
+These scripts are provided **as-is** and are _not being actively maintained_. PRs with fixes and new additions are welcome.
 
 **Important Notes:** If you run into trouble, please double check the steps **carefully** and check the error log in the script editor before raising issues or seeking help. If you find anything in this _Readme_ confusing, please raise an issue in Github. Please be as specific as possible with any questions.
 

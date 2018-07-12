@@ -3,7 +3,7 @@ Google scripts for Fitbit step data / heart rate interday / intraday download (o
 
 These scripts are provided **as-is** and are _not being actively maintained_. PRs with fixes and new additions are welcome.
 
-**Important Notes:** If you run into trouble, please double check the steps **carefully** and check the error log in the script editor before raising issues or seeking help. If you find anything in this _Readme_ confusing, please raise an issue in Github. Please be as specific as possible with any questions.
+**Important Notes:** If you run into trouble, please double check the steps **carefully** and check the error log in the script editor before raising issues or seeking help.
 
 If you are seeing this error "_The app you're trying to connect did not provide valid information to Fitbit. Please report this issue to them_."
 
